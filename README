@@ -1,0 +1,15 @@
+This is simple project which should provide templating abilities for Arduino 
+with Ethernet Shield (with SD card socket).
+
+Summary:
+You can parse files on SD card and Arduino will replace strings #{x} with
+output of function. You define in sketch which mnemonics (downcase letters)
+are associated with which function.
+
+You can make more compliacted HTML pages and not being limited by RAM/flash
+size. 
+
+You can read more about what and how:
+
+http://starter-kit.nettigo.eu/2011/p4a-php-for-arduino-part-1/
+http://starter-kit.nettigo.eu/2011/p4a-php-for-arduino-part-2/

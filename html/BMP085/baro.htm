@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Barometr</title>
+<style type="text/css" media="screen">
+/* <![CDATA[ */
+	img.bar
+	{
+		visibility:hidden;
+	}
+/* ]]> */
+</style>
+
+<script type="text/javascript" language="javascript" charset="utf-8">
+// <![CDATA[
+	function image(ctx, idname, x, y)
+	{
+		var img = document.getElementById(idname);
+		ctx.drawImage(img, x, y);
+	}
+	
+	function hand(ctx, value)
+	{
+		ctx.save();
+		ctx.rotate(value);
+		image(ctx, 'hand', -122, -22);
+		ctx.restore();
+	}
+	
+	function shadow(ctx, value)
+	{
+		ctx.save();
+		ctx.translate(5, 5);
+		ctx.save();
+		ctx.rotate(value);
+		image(ctx, 'shadow', -122, -22);
+		ctx.restore();
+		ctx.restore();
+	}
+	
+	function icon(ctx, value)
+	{
+		if (value < 1000)
+		{
+			image(ctx, 'rain', -82, 20);
+		}
+		else if (value < 1030)
+		{
+			image(ctx, 'cloudy', -82, 20);
+		}
+		else
+		{
+			image(ctx, 'sun', -82, 20);
+		}
+	}
+	
+	function draw(value)
+	{
+		var canvas = document.getElementById('barometr');
+		if (canvas.getContext)
+		{
+			angle = Math.PI * 2 * (0.005 * value - 4.207);
+			var ctx = canvas.getContext('2d');
+			ctx.save();
+			ctx.translate(240, 240);
+			image(ctx, 'face', -240, -240);
+			icon(ctx, value);
+			shadow(ctx, angle);
+			hand(ctx, angle);
+			ctx.restore();
+		}
+	}
+// ]]>
+</script>
+</head>
+<body onload="draw(#{p});">
+<canvas id="barometr" width="480" height="480">1050 hPa</canvas>
+<!--
+<img src="http://static.nettigo.pl/baro/face.png" id="face" class="bar"/>
+<img src="http://static.nettigo.pl/baro/cloudy.png" id="cloudy" class="bar"/>
+<img src="http://static.nettigo.pl/baro/sun.png" id="sun" class="bar"/>
+<img src="http://static.nettigo.pl/baro/rain.png" id="rain" class="bar"/>
+<img src="http://static.nettigo.pl/baro/hand.png" id="hand" class="bar"/>
+<img src="http://static.nettigo.pl/baro/shadow.png" id="shadow" class="bar"/>
+-->
+<img src="face.png" id="face" class="bar"/>
+<img src="cloudy.png" id="cloudy" class="bar"/>
+<img src="sun.png" id="sun" class="bar"/>
+<img src="rain.png" id="rain" class="bar"/>
+<img src="hand.png" id="hand" class="bar"/>
+<img src="shadow.png" id="shadow" class="bar"/>
+</body>
+</html>
+
